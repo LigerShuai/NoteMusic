@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_item_margin">10dp</dimen>
+    <dimen name="size_item_first_margin">20dp</dimen>
+
+    <dimen name="width_iv_cover">50dp</dimen>
+    <dimen name="view_mini_player_height">60dp</dimen>
+
+    <!--PlayControlView-->
+    <dimen name="view_play_control_height">140dp</dimen>
+    <dimen name="width_play_control">70dp</dimen>
+    <dimen name="width_play_pre">50dp</dimen>
+
+</resources>

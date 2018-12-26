@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Note</string>
+
+    <string name="Permission_note">提示</string>
+    <string name="Permission_msg">缺少必须权限，需要授权才能使用,请重新授权！</string>
+    <string name="Permission_retry">重新授权</string>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/view_mini_player_height">
+
+    <RelativeLayout
+        android:id="@+id/view_mini_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="@dimen/width_iv_cover"
+            android:layout_height="@dimen/width_iv_cover"
+            android:layout_marginStart="20dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/view_mini_song_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@+id/cover"
+            android:text="七里香" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_control"
+        android:layout_width="@dimen/width_iv_cover"
+        android:layout_height="@dimen/width_iv_cover"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/iv_play_list"
+        android:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/iv_play_list"
+        android:layout_width="@dimen/width_iv_cover"
+        android:layout_height="@dimen/width_iv_cover"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>
