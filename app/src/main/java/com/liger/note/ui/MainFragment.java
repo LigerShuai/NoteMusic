@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.liger.note.base.BaseFragment;
 import com.liger.note.model.Music;
 import com.liger.note.media.MusicFactory;
 import com.liger.note.media.manager.MusicDataManager;
+import com.liger.note.ui.adapter.OnLoadMoreListener;
 import com.liger.note.ui.view.MiniPlayerView;
 import com.liger.note.utils.ListUtils;
 import com.liger.note.utils.ScanUtil;
@@ -35,7 +37,7 @@ import java.util.List;
 public class MainFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
-    private MainAdapter mAdapter;
+    private MainAdapter2 mAdapter;
     private MainVM mainVM;
     private MiniPlayerView mMiniPlayerView;
 
@@ -63,14 +65,68 @@ public class MainFragment extends BaseFragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(getContext().getDrawable(R.drawable.rv_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
-        mAdapter = new MainAdapter();
+        mAdapter = new MainAdapter2(getContext());
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                playItem(position);
+//            }
+//        });
+        setLoadMoreListener(mRecyclerView);
+        mAdapter.setLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                playItem(position);
+            public void onLoadMore() {
+
             }
         });
+    }
+
+    private int lastPosition = 0;
+
+    private void setLoadMoreListener(RecyclerView recyclerView) {
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        final LinearLayoutManager manager;
+        if (layoutManager instanceof LinearLayoutManager) {
+            manager = (LinearLayoutManager) layoutManager;
+        } else {
+            return;
+        }
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                setLoadMore(manager, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+//                lastPosition = manager.findLastCompletelyVisibleItemPosition();
+            }
+        });
+    }
+
+    private void setLoadMore(LinearLayoutManager manager, int newState) {
+        // 当不滑动时
+        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+            //获取最后一个完全显示的itemPosition
+            lastPosition = manager.findLastCompletelyVisibleItemPosition();
+            int itemCount = manager.getItemCount();
+            // 判断是否滑动到了最后一个item
+            if (lastPosition == itemCount - 1) {
+                //加载更多
+                loadMore();
+            }
+        }
+    }
+
+    private void loadMore() {
+        Log.d("shuai", "loadMore: ");
+        if (mAdapter != null) {
+            mAdapter.loadMore();
+        }
     }
 
     private void playItem(int position) {
@@ -91,7 +147,8 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onChanged(@Nullable List<Music> music) {
                 if (!ListUtils.isEmpty(music)) {
-                    mAdapter.setNewData(music);
+//                    mAdapter.setNewData(music);
+                    mAdapter.setData(music);
                 }
             }
         });
