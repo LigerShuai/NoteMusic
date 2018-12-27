@@ -1,10 +1,10 @@
-package com.liger.note.sdk.manager;
+package com.liger.note.media.manager;
 
 import android.util.Log;
 
 import com.liger.note.model.Music;
-import com.liger.note.sdk.callback.MusicChangedListener;
-import com.liger.note.sdk.interfaces.IMusicControl;
+import com.liger.note.media.callback.MusicChangedListener;
+import com.liger.note.media.interfaces.IMusicControl;
 
 /**
  * @author Liger

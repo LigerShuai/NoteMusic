@@ -1,4 +1,4 @@
-package com.liger.note.sdk.interfaces;
+package com.liger.note.media.interfaces;
 
 import com.liger.note.model.Music;
 

@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.liger.note.R;
 import com.liger.note.model.Music;
-import com.liger.note.sdk.MusicFactory;
-import com.liger.note.sdk.callback.MusicChangedListener;
+import com.liger.note.media.MusicFactory;
+import com.liger.note.media.callback.MusicChangedListener;
 import com.liger.note.ui.PlayerActivity;
 
 /**

@@ -1,4 +1,4 @@
-package com.liger.note.sdk.callback;
+package com.liger.note.media.callback;
 
 import com.liger.note.model.Music;
 

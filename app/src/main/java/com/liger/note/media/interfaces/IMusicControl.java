@@ -1,7 +1,7 @@
-package com.liger.note.sdk.interfaces;
+package com.liger.note.media.interfaces;
 
 import com.liger.note.model.Music;
-import com.liger.note.sdk.callback.MusicChangedListener;
+import com.liger.note.media.callback.MusicChangedListener;
 
 /**
  * @author Liger

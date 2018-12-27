@@ -1,4 +1,4 @@
-package com.liger.note.sdk.manager;
+package com.liger.note.media.manager;
 
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
@@ -6,8 +6,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.liger.note.model.Music;
-import com.liger.note.sdk.callback.MusicChangedListener;
-import com.liger.note.sdk.interfaces.IMusicControl;
+import com.liger.note.media.callback.MusicChangedListener;
+import com.liger.note.media.interfaces.IMusicControl;
 import com.liger.note.utils.ListUtils;
 
 import java.io.IOException;

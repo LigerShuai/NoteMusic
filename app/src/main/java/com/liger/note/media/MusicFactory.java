@@ -1,7 +1,7 @@
-package com.liger.note.sdk;
+package com.liger.note.media;
 
-import com.liger.note.sdk.manager.MusicControlManager;
-import com.liger.note.sdk.manager.MusicDataManager;
+import com.liger.note.media.manager.MusicControlManager;
+import com.liger.note.media.manager.MusicDataManager;
 
 /**
  * @author Liger

@@ -2,7 +2,7 @@ package com.liger.note;
 
 import android.app.Application;
 
-import com.liger.note.sdk.MusicFactory;
+import com.liger.note.media.MusicFactory;
 import com.liger.note.ui.MainActivity;
 
 /**

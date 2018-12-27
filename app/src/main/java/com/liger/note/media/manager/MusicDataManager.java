@@ -1,7 +1,7 @@
-package com.liger.note.sdk.manager;
+package com.liger.note.media.manager;
 
 import com.liger.note.model.Music;
-import com.liger.note.sdk.interfaces.IMusicData;
+import com.liger.note.media.interfaces.IMusicData;
 
 import java.util.List;
 

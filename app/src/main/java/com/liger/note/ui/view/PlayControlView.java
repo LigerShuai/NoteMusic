@@ -9,7 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.liger.note.R;
-import com.liger.note.sdk.MusicFactory;
+import com.liger.note.media.MusicFactory;
 
 /**
  * @author Liger
