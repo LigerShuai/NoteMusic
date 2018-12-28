@@ -28,6 +28,7 @@ import com.liger.note.utils.ListUtils;
 import com.liger.note.utils.ScanUtil;
 import com.liger.note.ui.vm.MainVM;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ import java.util.List;
 public class MainFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
-    private MainAdapter2 mAdapter;
+    private MainAdapter mAdapter;
     private MainVM mainVM;
     private MiniPlayerView mMiniPlayerView;
 
@@ -65,22 +66,43 @@ public class MainFragment extends BaseFragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(getContext().getDrawable(R.drawable.rv_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
-        mAdapter = new MainAdapter2(getContext());
+//        mAdapter = new MainAdapter2(getContext());
+        mAdapter = new MainAdapter();
         mRecyclerView.setAdapter(mAdapter);
-//        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                playItem(position);
-//            }
-//        });
-        setLoadMoreListener(mRecyclerView);
-        mAdapter.setLoadMoreListener(new OnLoadMoreListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onLoadMore() {
-
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                playItem(position);
             }
         });
+//        setLoadMoreListener(mRecyclerView);
+//        mAdapter.setLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore() {
+//
+//            }
+//        });
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                loadData();
+            }
+        }, mRecyclerView);
     }
+
+    private void loadData() {
+        if (mainVM == null) {
+            return;
+        }
+        if (mainVM.loadData()) {
+            mAdapter.loadMoreEnd();
+            Log.d("shuai", "loadMoreEnd: ");
+        } else {
+            mAdapter.loadMoreComplete();
+            Log.d("shuai", "loadMoreComplete: ");
+        }
+    }
+
 
     private int lastPosition = 0;
 
@@ -123,10 +145,10 @@ public class MainFragment extends BaseFragment {
     }
 
     private void loadMore() {
-        Log.d("shuai", "loadMore: ");
-        if (mAdapter != null) {
-            mAdapter.loadMore();
-        }
+//        Log.d("shuai", "loadMore: ");
+//        if (mAdapter != null) {
+//            mAdapter.loadMore();
+//        }
     }
 
     private void playItem(int position) {
@@ -143,16 +165,18 @@ public class MainFragment extends BaseFragment {
     private void initData() {
         mainVM = ViewModelProviders.of(this).get(MainVM.class);
         mainVM.fetchData();
+        mainVM.loadData();
         mainVM.getMainLiveData().observe(this, new Observer<List<Music>>() {
             @Override
             public void onChanged(@Nullable List<Music> music) {
                 if (!ListUtils.isEmpty(music)) {
+                    mAdapter.addData(music);
 //                    mAdapter.setNewData(music);
-                    mAdapter.setData(music);
+//                    mAdapter.setData(music);
                 }
             }
         });
-        scanData();
+//        scanData();
     }
 
     private void scanData() {

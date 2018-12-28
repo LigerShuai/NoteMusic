@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.liger.note.base.BaseViewModel;
 import com.liger.note.model.Music;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,5 +37,21 @@ public class MainVM extends BaseViewModel {
     protected void onCleared() {
         super.onCleared();
         mainLiveData = null;
+    }
+
+    private int mCurPage = 1;
+
+    public boolean loadData() {
+        List<Music> list = new ArrayList<>();
+        Music music;
+        for (int i = 0; i < 20; i++) {
+            music = new Music();
+            music.setName(i + "");
+            music.setSinger(i + "");
+            list.add(music);
+        }
+        getMainLiveData().postValue(list);
+        mCurPage++;
+        return mCurPage == 7;
     }
 }
